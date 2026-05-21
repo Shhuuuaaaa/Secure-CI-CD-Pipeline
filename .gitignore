@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Base de données SQLite générée au runtime
+*.db
+
+# Rapports de scan générés localement
+*.sarif
+
+# Environnement virtuel
+venv/
+.env
