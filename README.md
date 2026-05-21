@@ -1,6 +1,6 @@
-# 🛡️ Secure CI/CD Pipeline - DevSecOps Lab
+# Secure CI/CD Pipeline - DevSecOps Lab
 
-> ⚠️ **AVERTISSEMENT** : Cette application contient des vulnérabilités **intentionnelles** à des fins éducatives. Ne pas déployer en l'état.
+> **AVERTISSEMENT** : Cette application contient des vulnérabilités **intentionnelles** à des fins éducatives. Ne pas déployer en l'état.
 
 ## Tableau de bord de sécurité
 
@@ -24,6 +24,7 @@ Projet réalisé en complément des parcours **TryHackMe Secure Software Develop
 
 Les 3 scanners s'exécutent en parallèle à chaque `push` pour minimiser le temps total du pipeline. Pipeline complet exécuté avec succès en seulement **47 secondes**.
 
+```text
 Push / Pull Request
 │
 ├── Semgrep (SAST) ──────→ Détecte SQLi, eval(), mauvaises pratiques
@@ -31,7 +32,9 @@ Push / Pull Request
 └── Trivy (Container) ────→ Détecte les CVE de l'image Docker
 │
 └── Résultats → GitHub Security tab (format SARIF)
+````
 
+---
 
 ![Pipeline Status](/docs/images/pipeline_complet.png)
 
