@@ -11,10 +11,14 @@ def search():
     conn = sqlite3.connect("mydb.db")
     cursor = conn.cursor()
 
-# VULNERABILITE : 
+    # VULNÉRABILITÉ : Concaténation directe avec '+' (SQL Injection)
     query = "SELECT * FROM users WHERE name = '" + user_input + "'"
     cursor.execute(query)
     return str(cursor.fetchall())
+
+    # CORRECTION : Utiliser les requêtes paramétrées avec "?"
+    # query = "SELECT * FROM users WHERE name = ?"
+    # cursor.execute(query, (user_input,))
 
 
 # --- 2. Remote Code Execution (RCE) via eval() ---
@@ -24,8 +28,13 @@ def calculator():
     user_expr = request.args.get("expr") 
 
     try: 
-        # VULNERABILITE : DANGER ABSOLU : eval() exécute aveuglément l'input comme du code Python
+        # VULNERABILITE : eval() exécute aveuglément l'input comme du code Python (RCE)
         result = eval(user_expr)
+
+        # CORRECTION : Utiliser ast.litteral_eval pour restreindre aux calculs de base
+        # import ast
+        # result = ast.litteral_eval(user_expr)
+
         return f"Résultat du calcul : {result}"
     except Exception as e: 
         return f"Erreur : {str(e)}"
@@ -35,6 +44,11 @@ def calculator():
 # VULNERABILITE : Stocker des identifiants sensibles directement dans le code source
 AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7R89X2TB"
 AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCY98ZTR45MLK"
+
+# CORRECTION : Récupérer les clés depuis les variables d'environnement du serveur
+# import os 
+# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 @app.route("/backups")
 def get_backups():
